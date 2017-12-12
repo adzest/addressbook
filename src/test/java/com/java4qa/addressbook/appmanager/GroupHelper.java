@@ -4,19 +4,18 @@ import com.java4qa.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class GroupHelper {
-    private ChromeDriver wd;
+public class GroupHelper extends HelperBase {
 
     public GroupHelper(ChromeDriver wd) {
-        this.wd = wd;
+        super(wd);
     }
 
     public void returnToGroupPage() {
-        wd.findElement(By.linkText("group page")).click();
+        click(By.linkText("group page"));
     }
 
     public void submitGroupCreation() {
-        wd.findElement(By.name("submit")).click();
+        click(By.name("submit"));
     }
 
     public void fillGroupForm(GroupData groupData) {
@@ -25,21 +24,23 @@ public class GroupHelper {
         type(By.name("group_footer"), groupData.getFooter());
     }
 
-    private void type(By locator, String text) {
-        wd.findElement(locator).click();
-        wd.findElement(locator).clear();
-        wd.findElement(locator).sendKeys(text);
-    }
-
     public void initGroupCreation() {
-        wd.findElement(By.name("new")).click();
+        click(By.name("new"));
     }
 
     public void deleteSelectedGroups() {
-        wd.findElement(By.name("delete")).click();
+        click(By.name("delete"));
     }
 
     public void selectGroup() {
-        wd.findElement(By.xpath("//div[@id='content']/form/span[2]/input")).click();
+        click(By.xpath("//div[@id='content']/form/span[2]/input"));
+    }
+
+    public void initGroupModification() {
+        click(By.name("edit"));
+    }
+
+    public void submitGroupModification() {
+        click(By.name("update"));
     }
 }

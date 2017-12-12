@@ -3,19 +3,17 @@ package com.java4qa.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class NavigationHelper {
-    private ChromeDriver wd;
+public class NavigationHelper extends HelperBase{
 
     public NavigationHelper(ChromeDriver wd) {
-        this.wd = wd;
+        super(wd);
     }
 
-
     public void gotoGroupPage() {
-        wd.findElement(By.linkText("GROUPS")).click();
+        click(By.linkText("GROUPS"));
     }
 
     public void gotoAddNewPage() {
-        wd.findElement(By.linkText("ADD_NEW")).click();
+        click(By.linkText("ADD_NEW"));
     }
 }
