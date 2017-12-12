@@ -1,4 +1,4 @@
-package com.java4qa.addressbook;
+package com.java4qa.addressbook.model;
 
 public class AddNewData {
     private final String firstNameData;

@@ -1,23 +1,21 @@
-package com.java4qa.addressbook;
+package com.java4qa.addressbook.appmanager;
 
-import org.testng.annotations.Test;
+import com.java4qa.addressbook.model.AddNewData;
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
 
-import org.openqa.selenium.*;
+public class AddNewHelper {
+    private ChromeDriver wd;
 
-public class AddNewTests extends TestBase {
-
-    @Test
-    public void testAddNew() {
-        gotoAddNewPage();
-        fillAddNewForm(new AddNewData("FirstNameData", "LastNameData", "CompanyData", "PhoneWorkData"));
-        submitAddNew();
+    public AddNewHelper(ChromeDriver wd) {
+        this.wd = wd;
     }
 
-    private void submitAddNew() {
+    public void submitAddNew(ApplicationManager app) {
         wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
     }
 
-    private void fillAddNewForm(AddNewData addNewData) {
+    public void fillAddNewForm(AddNewData addNewData) {
         wd.findElement(By.name("firstname")).click();
         wd.findElement(By.name("firstname")).clear();
         wd.findElement(By.name("firstname")).sendKeys(addNewData.getFirstNameData());
@@ -32,9 +30,5 @@ public class AddNewTests extends TestBase {
         wd.findElement(By.name("work")).click();
         wd.findElement(By.name("work")).clear();
         wd.findElement(By.name("work")).sendKeys(addNewData.getPhoneWorkData());
-    }
-
-    private void gotoAddNewPage() {
-        wd.findElement(By.linkText("ADD_NEW")).click();
     }
 }
