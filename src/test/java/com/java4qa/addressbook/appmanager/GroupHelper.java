@@ -3,7 +3,6 @@ package com.java4qa.addressbook.appmanager;
 import com.java4qa.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 public class GroupHelper extends HelperBase {
 
@@ -12,7 +11,7 @@ public class GroupHelper extends HelperBase {
     }
 
     public void selectGroup() {
-        click(By.xpath("//div[@id='content']/form/span[2]/input"));
+        click(By.name("selected[]"));
     }
 
     public void deleteSelectedGroups() {
@@ -43,5 +42,23 @@ public class GroupHelper extends HelperBase {
 
     public void returnToGroupPage() {
         click(By.linkText("group page"));
+    }
+
+    public void createGroup(GroupData group) {
+        initGroupCreation();
+        fillGroupForm(group);
+        submitGroupCreation();
+        returnToGroupPage();
+    }
+
+    public boolean isThereAGroup() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+    public void modifyGroup(GroupData group) {
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        returnToGroupPage();
     }
 }

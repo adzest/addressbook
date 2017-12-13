@@ -45,5 +45,28 @@ public class ContactHelper extends HelperBase{
     public void returnToHomePage() {
         click(By.linkText("home page"));
     }
+
+    public void createContact(ContactData contact, boolean creation) {
+        fillContactForm(contact, creation);
+        submitContactCreation();
+        returnToHomePage();
+    }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.cssSelector("#maintable > tbody > tr:nth-child(2) > td:nth-child(8) > a > img"));
+    }
+
+    public void deleteContact() {
+        initContactModification();
+        submitContactDeletion();
+    }
+
+    public void modifyContact(ContactData contact, boolean creation) {
+        initContactModification();
+        fillContactForm(contact, creation);
+        submitContactModification();
+        returnToHomePage();
+
+    }
 }
 

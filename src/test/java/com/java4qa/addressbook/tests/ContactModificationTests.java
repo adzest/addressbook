@@ -6,9 +6,10 @@ import org.testng.annotations.Test;
 public class ContactModificationTests extends TestBase{
     @Test
     public void testGroupModification() {
-        app.getContactHelper().initContactModification();
-        app.getContactHelper().fillContactForm(new ContactData("FirsMod", "Lastmod", "CompanyMod", null), false);
-        app.getContactHelper().submitContactModification();
-        app.getContactHelper().returnToHomePage();
+        if (! app.getContactHelper().isThereAContact()) {
+            app.getNavigationHelper().gotoContactCreationPage();
+            app.getContactHelper().createContact(new ContactData("FirstNameData", "test_sername", "CompanyData", "test12"), true);
+        }
+        app.getContactHelper().modifyContact(new ContactData("FirstNameData", "test_sername", "CompanyData", "test12"), false);
     }
 }
