@@ -13,6 +13,7 @@ public class GroupModificationTests extends TestBase{
         if (! app.getGroupHelper().isThereAGroup()) {
             app.getGroupHelper().createGroup(new GroupData("test12", null, null));
         }
+        app.getGroupHelper().selectGroup(before -1);
         app.getGroupHelper().modifyGroup(new GroupData("test12", null, "test13"));
         int after = app.getGroupHelper().getGroupCount();
         Assert.assertEquals(after, before );

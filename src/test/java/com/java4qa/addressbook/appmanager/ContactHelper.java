@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-public class ContactHelper extends HelperBase{
+public class ContactHelper extends HelperBase {
 
     public ContactHelper(WebDriver wd) {
         super(wd);
@@ -19,7 +19,7 @@ public class ContactHelper extends HelperBase{
         type(By.name("lastname"), contactData.getLastNameData());
         type(By.name("company"), contactData.getCompanyData());
 
-        if (creationForm){
+        if (creationForm) {
             new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -30,6 +30,14 @@ public class ContactHelper extends HelperBase{
         click(By.name("submit"));
     }
 
+    public void returnToHomePage() {
+        click(By.linkText("home page"));
+    }
+
+    public void submitContactDeletion() {
+        click(By.xpath("//*[@id=\"content\"]/form[2]/input[2]"));
+    }
+
     public void initContactModification() {
         click(By.cssSelector("#maintable > tbody > tr:nth-child(2) > td:nth-child(8) > a > img"));
     }
@@ -38,22 +46,14 @@ public class ContactHelper extends HelperBase{
         click(By.name("update"));
     }
 
-    public void submitContactDeletion() {
-        click(By.xpath("//*[@id=\"content\"]/form[2]/input[2]"));
-    }
-
-    public void returnToHomePage() {
-        click(By.linkText("home page"));
-    }
-
     public void createContact(ContactData contact, boolean creation) {
         fillContactForm(contact, creation);
         submitContactCreation();
         returnToHomePage();
     }
 
-    public boolean isThereAContact() {
-        return isElementPresent(By.cssSelector("#maintable > tbody > tr:nth-child(2) > td:nth-child(8) > a > img"));
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void deleteContact() {
@@ -66,7 +66,14 @@ public class ContactHelper extends HelperBase{
         fillContactForm(contact, creation);
         submitContactModification();
         returnToHomePage();
+    }
 
+    public boolean isThereAContact() {
+        return isElementPresent(By.cssSelector("#maintable > tbody > tr:nth-child(2) > td:nth-child(8) > a > img"));
+    }
+
+    public int getContactCount() {
+        return wd.findElements(By.name("selected[]")).size();
     }
 }
 
