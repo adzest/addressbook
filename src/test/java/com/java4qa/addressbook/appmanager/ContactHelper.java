@@ -1,12 +1,17 @@
 package com.java4qa.addressbook.appmanager;
 
 import com.java4qa.addressbook.model.ContactData;
+import com.java4qa.addressbook.model.GroupData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -74,6 +79,18 @@ public class ContactHelper extends HelperBase {
 
     public int getContactCount() {
         return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<ContactData> getContactList() {
+        List<ContactData> contacts = new ArrayList<ContactData>();
+        List<WebElement> elements = wd.findElements(By.name("selected[]"));
+        elements.remove(elements.get(0));
+        for (WebElement element : elements){
+            String firstName = element.getText();
+            ContactData contact = new ContactData( firstName, null, null, null);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
 
