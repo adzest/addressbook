@@ -4,7 +4,8 @@ import com.java4qa.addressbook.model.GroupData;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
 
 public class GroupModificationTests extends TestBase {
 
@@ -20,10 +21,8 @@ public class GroupModificationTests extends TestBase {
         app.getGroupHelper().modifyGroup(group);
         List<GroupData> after = app.getGroupHelper().getGroupList();
         Assert.assertEquals(after.size(), before.size());
-
         before.remove(before.size() - 1);
         before.add(group);
-//       For Java < 8
         Comparator<? super GroupData> byId = Comparator.comparingInt(GroupData::getId);
         before.sort(byId);
         after.sort(byId);

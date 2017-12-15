@@ -1,64 +1,83 @@
 package com.java4qa.addressbook.model;
 
 public class ContactData {
-    private final String firstNameData;
-    private final String lastNameData;
-    private final String companyData;
-    private String group;
+  private int id;
+  private final String firstName;
+  private String lastName;
+  private final String company;
+  private String group;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+  public ContactData(String firstName, String lastName, String company, String group) {
+    this.id = Integer.MAX_VALUE;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.company = company;
+    this.group = group;
+  }
 
-        ContactData that = (ContactData) o;
+  public ContactData(int id, String firstName, String lastName, String company, String group) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.company = company;
+    this.group = group;
+  }
 
-        if (firstNameData != null ? !firstNameData.equals(that.firstNameData) : that.firstNameData != null)
-            return false;
-        if (lastNameData != null ? !lastNameData.equals(that.lastNameData) : that.lastNameData != null) return false;
-        if (companyData != null ? !companyData.equals(that.companyData) : that.companyData != null) return false;
-        return group != null ? group.equals(that.group) : that.group == null;
-    }
+  public int getId() {
+    return id;
+  }
 
-    @Override
-    public int hashCode() {
-        int result = firstNameData != null ? firstNameData.hashCode() : 0;
-        result = 31 * result + (lastNameData != null ? lastNameData.hashCode() : 0);
-        result = 31 * result + (companyData != null ? companyData.hashCode() : 0);
-        result = 31 * result + (group != null ? group.hashCode() : 0);
-        return result;
-    }
+  public String getFirstName() {
+    return firstName;
+  }
 
-    @Override
-    public String toString() {
-        return "ContactData{" +
-                "firstNameData='" + firstNameData + '\'' +
-                ", lastNameData='" + lastNameData + '\'' +
-                ", companyData='" + companyData + '\'' +
-                ", group='" + group + '\'' +
-                '}';
-    }
+  public String getLastName() {
+    return lastName;
+  }
 
-    public ContactData(String firstNameData, String lastNameData, String companyData, String group) {
-        this.firstNameData = firstNameData;
-        this.lastNameData = lastNameData;
-        this.companyData = companyData;
-        this.group = group;
-    }
+  public String getCompany() {
+    return company;
+  }
 
-    public String getFirstNameData() {
-        return firstNameData;
-    }
+  public String getGroup() {
+    return group;
+  }
 
-    public String getLastNameData() {
-        return lastNameData;
-    }
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
 
-    public String getCompanyData() {
-        return companyData;
-    }
+  public void setGroup(String group) {
+    this.group = group;
+  }
 
-    public String getGroup() {
-        return group;
-    }
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ContactData that = (ContactData) o;
+
+    if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) return false;
+    if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) return false;
+    return group != null ? group.equals(that.group) : that.group == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = firstName != null ? firstName.hashCode() : 0;
+    result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+    result = 31 * result + (group != null ? group.hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+          "firstName='" + firstName + '\'' +
+          ", lastName='" + lastName + '\'' +
+          ", group='" + group + '\'' +
+          '}';
+  }
+
 }
