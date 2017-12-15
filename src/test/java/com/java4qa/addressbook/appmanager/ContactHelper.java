@@ -58,12 +58,14 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
-  public void deleteContact() {
+  public void deleteContact(int index) {
+    selectContact(index);
     initContactModification();
     submitContactDeletion();
   }
 
-  public void modifyContact(ContactData contact, boolean creation) {
+  public void modifyContact(int index, ContactData contact, boolean creation) {
+    selectContact(index);
     initContactModification();
     fillContactForm(contact, creation);
     submitContactModification();
