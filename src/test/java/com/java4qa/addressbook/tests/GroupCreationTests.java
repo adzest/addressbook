@@ -20,20 +20,13 @@ public class GroupCreationTests extends TestBase {
     Assert.assertEquals(after.size(), before.size() + 1);
 
 
-    int max = 0;
-    for (GroupData g: after){
-      if (g.getId() > max){
-        max = g.getId();
-      }
-    }
-//    Comparator<? super GroupData> byId = new Comparator<GroupData>() {
-//      @Override
-//      public int compare(GroupData o1, GroupData o2) {
-//        return Integer.compare(o1.getId(), o2.getId());
+//    int max = 0;
+//    for (GroupData g: after){
+//      if (g.getId() > max){
+//        max = g.getId();
 //      }
-//    };
-//    int max = after.stream().max(byId).get().getId();
-    group.setId(max);
+//    }
+    group.setId(after.stream().max(Comparator.comparingInt(GroupData::getId)).get().getId());
     before.add(group);
     Assert.assertEquals(new HashSet<Object>(before), new HashSet<Object>(after));
   }
