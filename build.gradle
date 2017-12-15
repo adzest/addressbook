@@ -1,8 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 
-sourceCompatibility = 1.8
-
+sourceCompatibility = 1.6
 
 repositories {
     mavenCentral()
