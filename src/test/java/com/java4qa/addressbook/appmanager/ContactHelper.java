@@ -16,16 +16,28 @@ public class ContactHelper extends HelperBase {
     super(wd);
   }
 
-  public void fillContactForm(ContactData contactData, boolean creationForm) {
+  public void fillContactForm(ContactData contactData, boolean creation) {
     type(By.name("firstname"), contactData.getFirstName());
     type(By.name("lastname"), contactData.getLastName());
-    type(By.name("company"), contactData.getCompany());
-
-    if (creationForm) {
+    if (creation) {
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
+  }
+
+  public void create(ContactData contact, boolean creation) {
+    fillContactForm(contact, creation);
+    submitContactCreation();
+    returnToHomePage();
+  }
+
+  public void modify(int index, ContactData contact, boolean creation) {
+    selectContact(index);
+    initContactModification();
+    fillContactForm(contact, creation);
+    submitContactModification();
+    returnToHomePage();
   }
 
   public void submitContactCreation() {
@@ -48,28 +60,14 @@ public class ContactHelper extends HelperBase {
     click(By.name("update"));
   }
 
-  public void createContact(ContactData contact, boolean creation) {
-    fillContactForm(contact, creation);
-    submitContactCreation();
-    returnToHomePage();
-  }
-
   public void selectContact(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
-  public void deleteContact(int index) {
+  public void delete(int index) {
     selectContact(index);
     initContactModification();
     submitContactDeletion();
-  }
-
-  public void modifyContact(int index, ContactData contact, boolean creation) {
-    selectContact(index);
-    initContactModification();
-    fillContactForm(contact, creation);
-    submitContactModification();
-    returnToHomePage();
   }
 
   public boolean isThereAContact() {
@@ -80,15 +78,14 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String name = element.findElement(By.cssSelector("td:nth-child(3)")).getAttribute("innerText");
       String surname = element.findElement(By.cssSelector("td:nth-child(2)")).getAttribute("innerText");
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      ContactData contact = new ContactData(id, name, surname, null, null);
-      contacts.add(contact);
+      contacts.add(new ContactData().withId(id).withFirstName(name).withLastName(surname));
     }
     return contacts;
   }
