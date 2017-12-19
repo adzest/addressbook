@@ -25,7 +25,7 @@ public class GroupModificationTests extends TestBase {
         }
     }
 
-    @Test
+    @Test(invocationCount = 1)
     public void testGroupModification() {
         Groups before = app.group().all();
         GroupData modifiedGroup = before.iterator().next();
@@ -33,7 +33,7 @@ public class GroupModificationTests extends TestBase {
               .withId(modifiedGroup.getId()).withName("test1_mod").withHeader("test2").withFooter("test3");
         app.group().modify(group);
         Groups after = app.group().all();
-        assertEquals(after.size(), before.size());
+        assertThat(after.size(), equalTo(before.size()));
         //TODO:DONE - Chapter 5 video 6: replace 2 methodes with one withModified.
         assertThat(after, equalTo(before.withModified(modifiedGroup, group)));
     }

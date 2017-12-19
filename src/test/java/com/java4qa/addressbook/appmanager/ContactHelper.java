@@ -1,20 +1,35 @@
 package com.java4qa.addressbook.appmanager;
 
 import com.java4qa.addressbook.model.ContactData;
+import com.java4qa.addressbook.model.Contacts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
   public ContactHelper(WebDriver wd) {
     super(wd);
+  }
+
+  public void initContactModification() {
+    click(By.cssSelector("#maintable > tbody > tr:nth-child(2) > td:nth-child(8) > a > img"));
+  }
+
+  public void submitContactCreation() {
+    click(By.name("submit"));
+  }
+
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
+
+  public void submitContactDeletion() {
+    click(By.xpath("//*[@id=\"content\"]/form[2]/input[2]"));
   }
 
   public void fillContactForm(ContactData contactData, boolean creation) {
@@ -27,9 +42,14 @@ public class ContactHelper extends HelperBase {
     }
   }
 
+  public void returnToHomePage() {
+    click(By.linkText("home page"));
+  }
+
   public void create(ContactData contact, boolean creation) {
     fillContactForm(contact, creation);
     submitContactCreation();
+    contactCache = null;
     returnToHomePage();
   }
 
@@ -38,32 +58,14 @@ public class ContactHelper extends HelperBase {
     initContactModification();
     fillContactForm(contact, creation);
     submitContactModification();
+    contactCache = null;
     returnToHomePage();
-  }
-
-  public void submitContactCreation() {
-    click(By.name("submit"));
-  }
-
-  public void returnToHomePage() {
-    click(By.linkText("home page"));
-  }
-
-  public void submitContactDeletion() {
-    click(By.xpath("//*[@id=\"content\"]/form[2]/input[2]"));
-  }
-
-  public void initContactModification() {
-    click(By.cssSelector("#maintable > tbody > tr:nth-child(2) > td:nth-child(8) > a > img"));
-  }
-
-  public void submitContactModification() {
-    click(By.name("update"));
   }
 
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
     initContactModification();
+    contactCache = null;
     submitContactDeletion();
   }
 
@@ -79,17 +81,21 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public Set<ContactData> all() {
-    Set<ContactData> contacts = new HashSet<ContactData>();
+  private Contacts contactCache = null;
+
+  public Contacts all() {
+    if (contactCache != null) {
+      return new Contacts(contactCache);
+    }
+    contactCache = new Contacts();
     List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       String name = element.findElement(By.cssSelector("td:nth-child(3)")).getAttribute("innerText");
       String surname = element.findElement(By.cssSelector("td:nth-child(2)")).getAttribute("innerText");
-      contacts.add(new ContactData().withId(id).withFirstName(name).withLastName(surname));
+      contactCache.add(new ContactData().withId(id).withFirstName(name).withLastName(surname));
     }
-    return contacts;
+    return new Contacts(contactCache);
   }
 
 }
-
