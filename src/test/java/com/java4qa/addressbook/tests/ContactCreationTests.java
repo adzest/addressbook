@@ -6,24 +6,22 @@ import org.testng.annotations.Test;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class ContactCreationTests extends TestBase {
 
     @Test
     public void testContactCreation() {
-        List<ContactData> before = app.contact().list();
+        Set<ContactData> before = app.contact().all();
         app.goTo().contactCreationPage();
         ContactData contact = new ContactData()
-              .withFirstName("test_Name").withLastName("test_Surname").withGroup("test1");
+              .withFirstName("test_name").withLastName("test_surname").withGroup("test1");
         app.contact().create(contact, true);
-        List<ContactData> after = app.contact().list();
+        Set<ContactData> after = app.contact().all();
         Assert.assertEquals(after.size(), before.size() + 1);
-//        contact.withLastName(after.stream().max(Comparator.comparingInt(ContactData::getId)).get().getLastName());
-//        contact.withGroup(after.stream().max(Comparator.comparingInt(ContactData::getId)).get().getGroup());
+
+        contact.withId(after.stream().mapToInt(ContactData::getId).max().getAsInt());
         before.add(contact);
-        Comparator<? super ContactData> byId = Comparator.comparingInt(ContactData::getId);
-        before.sort(byId);
-        after.sort(byId);
         Assert.assertEquals(before, after);
     }
 }

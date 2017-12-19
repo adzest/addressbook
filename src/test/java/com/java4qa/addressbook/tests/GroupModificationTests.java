@@ -1,6 +1,8 @@
 package com.java4qa.addressbook.tests;
 
 import com.java4qa.addressbook.model.GroupData;
+import com.java4qa.addressbook.model.Groups;
+import org.hamcrest.CoreMatchers;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -8,6 +10,10 @@ import org.testng.annotations.Test;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.AssertJUnit.assertEquals;
 
 public class GroupModificationTests extends TestBase {
 
@@ -21,16 +27,14 @@ public class GroupModificationTests extends TestBase {
 
     @Test
     public void testGroupModification() {
-        Set<GroupData> before = app.group().all();
+        Groups before = app.group().all();
         GroupData modifiedGroup = before.iterator().next();
         GroupData group = new GroupData()
-              .withId(modifiedGroup.getId()).withName("test1").withHeader("test2").withFooter("test3");
+              .withId(modifiedGroup.getId()).withName("test1_mod").withHeader("test2").withFooter("test3");
         app.group().modify(group);
-        Set<GroupData> after = app.group().all();
-        Assert.assertEquals(after.size(), before.size());
-
-        before.remove(modifiedGroup);
-        before.add(group);
-        Assert.assertEquals(before, after);
+        Groups after = app.group().all();
+        assertEquals(after.size(), before.size());
+        //TODO:DONE - Chapter 5 video 6: replace 2 methodes with one withModified.
+        assertThat(after, equalTo(before.withModified(modifiedGroup, group)));
     }
 }
