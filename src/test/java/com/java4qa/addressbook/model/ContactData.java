@@ -77,9 +77,21 @@ public class ContactData {
     return "ContactData{" +
           "firstName='" + firstName + '\'' +
           ", lastName='" + lastName + '\'' +
+          ", home='" + home + '\'' +
+          ", mobile='" + mobile + '\'' +
+          ", work='" + work + '\'' +
+          ", group='" + group + '\'' +
           '}';
-
   }
+
+  //  @Override
+//  public String toString() {
+//    return "ContactData{" +
+//          "firstName='" + firstName + '\'' +
+//          ", lastName='" + lastName + '\'' +
+//          '}';
+//
+//  }
 
   @Override
   public boolean equals(Object o) {
