@@ -18,7 +18,7 @@ public class ContactPhoneTests extends TestBase {
       app.goTo().contactCreationPage();
       //TODO: Add Phone number to the contact
       app.contact().create(new ContactData()
-            .withFirst("test_name").withLast("test_sername").withHomePhone("111").withMobilePhone("222").withWorkPhone("333"), true);
+            .withFirst("test_name").withLast("test_surname").withHomePhone("111").withMobilePhone("222").withWorkPhone("333"), true);
     }
   }
 
