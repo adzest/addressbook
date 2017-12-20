@@ -4,6 +4,13 @@ import com.java4qa.addressbook.model.ContactData;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 public class ContactPhoneTests extends TestBase {
 
   @BeforeMethod
@@ -12,7 +19,7 @@ public class ContactPhoneTests extends TestBase {
       app.goTo().contactCreationPage();
       //TODO: Add Phone number to the contact
       app.contact().create(new ContactData()
-            .withFirstName("test_name").withLastName("test_sername").withGroup("test1"), true);
+            .withFirst("test_name").withLast("test_sername").withHomePhone("111").withMobilePhone("222").withWorkPhone("333"), true);
     }
   }
 
@@ -21,6 +28,19 @@ public class ContactPhoneTests extends TestBase {
     //TODO: DONE - add check is there are any contact?
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
-//    ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+    ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
+
+    assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+   }
+
+  private String mergePhones(ContactData contact) {
+    return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
+          .stream().filter((s) -> ! s.equals(""))
+          .map(ContactPhoneTests::cleaned)
+          .collect(Collectors.joining("\n"));
+  }
+
+  public static String cleaned(String phone){
+    return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
 }

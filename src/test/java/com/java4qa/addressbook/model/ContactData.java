@@ -4,10 +4,11 @@ public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String firstName;
   private String lastName;
-  private String home;
-  private String mobile;
-  private String work;
+  private String homePhone;
+  private String mobilePhone;
+  private String workPhone;
   private String group;
+  private String allPhones;
 
   public int getId() {
     return id;
@@ -22,7 +23,7 @@ public class ContactData {
     return firstName;
   }
 
-  public ContactData withFirstName(String firstName) {
+  public ContactData withFirst(String firstName) {
     this.firstName = firstName;
     return this;
   }
@@ -31,35 +32,35 @@ public class ContactData {
     return lastName;
   }
 
-  public ContactData withLastName(String lastName) {
+  public ContactData withLast(String lastName) {
     this.lastName = lastName;
     return this;
   }
 
-  public String getHome() {
-    return home;
+  public String getHomePhone() {
+    return homePhone;
   }
 
-  public ContactData withHome(String home) {
-    this.home = home;
+  public ContactData withHomePhone(String home) {
+    this.homePhone = home;
     return this;
   }
 
-  public String getMobile() {
-    return mobile;
+  public String getMobilePhone() {
+    return mobilePhone;
   }
 
-  public ContactData withMobile(String mobile) {
-    this.mobile = mobile;
+  public ContactData withMobilePhone(String mobile) {
+    this.mobilePhone = mobile;
     return this;
   }
 
-  public String getWork() {
-    return work;
+  public String getWorkPhone() {
+    return workPhone;
   }
 
-  public ContactData withWork(String work) {
-    this.work = work;
+  public ContactData withWorkPhone(String work) {
+    this.workPhone = work;
     return this;
   }
 
@@ -77,9 +78,9 @@ public class ContactData {
     return "ContactData{" +
           "firstName='" + firstName + '\'' +
           ", lastName='" + lastName + '\'' +
-          ", home='" + home + '\'' +
-          ", mobile='" + mobile + '\'' +
-          ", work='" + work + '\'' +
+          ", homePhone='" + homePhone + '\'' +
+          ", mobilePhone='" + mobilePhone + '\'' +
+          ", workPhone='" + workPhone + '\'' +
           ", group='" + group + '\'' +
           '}';
   }
@@ -111,5 +112,15 @@ public class ContactData {
     result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     return result;
+  }
+
+
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
   }
 }
