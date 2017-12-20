@@ -5,6 +5,7 @@ import com.google.common.collect.ForwardingSet;
 import java.util.HashSet;
 import java.util.Set;
 
+@SuppressWarnings("Convert2Diamond")
 public class Groups extends ForwardingSet<GroupData>{
 
   private Set<GroupData> delegate;

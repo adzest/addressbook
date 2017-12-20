@@ -9,7 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
-  @Test(enabled = true, invocationCount = 1)
+  @Test()
   public void testContactCreation() {
     Contacts before = app.contact().all();
     app.goTo().contactCreationPage();
@@ -22,7 +22,7 @@ public class ContactCreationTests extends TestBase {
           before.withAdded(contact.withId(after.stream().mapToInt(ContactData::getId).max().getAsInt()))));
   }
 
-  @Test(enabled = false, invocationCount = 1)
+  @Test()
   public void testContactCreationWithGroup() {
 //    TODO: add ensurePreconditions() for this test. Groups should be existed!
     Contacts before = app.contact().all();
@@ -36,7 +36,7 @@ public class ContactCreationTests extends TestBase {
           before.withAdded(contact.withId(after.stream().mapToInt(ContactData::getId).max().getAsInt()))));
   }
 
-  @Test(enabled = true, invocationCount = 1)
+  @Test()
   public void testContactCreationWithPones() {
     Contacts before = app.contact().all();
     app.goTo().contactCreationPage();

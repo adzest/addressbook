@@ -2,18 +2,11 @@ package com.java4qa.addressbook.tests;
 
 import com.java4qa.addressbook.model.GroupData;
 import com.java4qa.addressbook.model.Groups;
-import org.hamcrest.CoreMatchers;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.AssertJUnit.assertEquals;
 
 public class GroupModificationTests extends TestBase {
 
@@ -25,7 +18,7 @@ public class GroupModificationTests extends TestBase {
         }
     }
 
-    @Test(invocationCount = 1)
+    @Test()
     public void testGroupModification() {
         Groups before = app.group().all();
         GroupData modifiedGroup = before.iterator().next();

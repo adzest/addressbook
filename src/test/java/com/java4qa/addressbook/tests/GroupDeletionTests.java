@@ -2,19 +2,11 @@ package com.java4qa.addressbook.tests;
 
 import com.java4qa.addressbook.model.GroupData;
 import com.java4qa.addressbook.model.Groups;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.*;
-import static org.testng.AssertJUnit.assertEquals;
 
 public class GroupDeletionTests extends TestBase {
 
