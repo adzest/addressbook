@@ -26,13 +26,13 @@ public class GroupDeletionTests extends TestBase {
     }
   }
 
-  @Test(invocationCount = 1)
+  @Test(invocationCount = 40)
   public void testGroupDeletion() {
     Groups before = app.group().all();
     GroupData deletedGroup = before.iterator().next();
     app.group().delete(deletedGroup);
+    assertThat(app.group().count(), equalTo(before.size() - 1));
     Groups after = app.group().all();
-    assertEquals(after.size(),before.size() - 1);
     assertThat(after, equalTo(before.withOut(deletedGroup)));
   }
 

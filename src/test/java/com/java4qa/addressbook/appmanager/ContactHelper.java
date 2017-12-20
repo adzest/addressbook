@@ -20,16 +20,14 @@ public class ContactHelper extends HelperBase {
     click(By.cssSelector("#maintable > tbody > tr:nth-child(2) > td:nth-child(8) > a > img"));
   }
 
-  public void submitContactCreation() {
-    click(By.name("submit"));
-  }
-
-  public void submitContactModification() {
-    click(By.name("update"));
-  }
-
-  public void submitContactDeletion() {
-    click(By.xpath("//*[@id=\"content\"]/form[2]/input[2]"));
+  public void initContactModificationById(int id) {
+    WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+    WebElement row = wd.findElement(By.xpath("./../.."));
+    List<WebElement> cells = row.findElements(By.tagName("td"));
+    cells.get(7).findElement(By.tagName("a")).click();
+//    wd.findElement(By.xpath(String.format("//input[@value='%s']/../../td[8]/a", id))).click();
+//    wd.findElement(By.xpath(String.format("//tr[.//input[@value='%s']]/td[8]/a", id))).click();
+//     wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
   }
 
   public void fillContactForm(ContactData contactData, boolean creation) {
@@ -40,6 +38,18 @@ public class ContactHelper extends HelperBase {
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
+  }
+
+  public void submitContactCreation() {
+    click(By.name("submit"));
+  }
+
+  public void submitContactModification() {
+    click(By.name("update"));
+  }
+
+  public void submitContactDeletion() {
+    click(By.xpath("//*[@id=\"content\"]/form[2]/input[2]"));
   }
 
   public void returnToHomePage() {
@@ -70,14 +80,14 @@ public class ContactHelper extends HelperBase {
   }
 
   private void selectContactById(int id) {
-    wd.findElement(By.cssSelector("input[value='" + id + "']"));
+    wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
   }
 
   public boolean isThereAContact() {
     return isElementPresent(By.cssSelector("#maintable > tbody > tr:nth-child(2) > td:nth-child(8) > a > img"));
   }
 
-  public int getContactCount() {
+  public int count() {
     return wd.findElements(By.name("selected[]")).size();
   }
 
@@ -98,4 +108,7 @@ public class ContactHelper extends HelperBase {
     return new Contacts(contactCache);
   }
 
+//  public ContactData infoFromEditForm(ContactData contact) {
+//
+//  }
 }
