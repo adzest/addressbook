@@ -4,15 +4,17 @@ public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String firstName;
   private String lastName;
+  private String companyAddress;
   private String homePhone;
   private String mobilePhone;
   private String workPhone;
-  private String allPhones;
   private String email;
   private String email2;
   private String email3;
-  private String allEmails;
   private String group;
+  private String allPhones;
+  private String allEmails;
+  private String contactDetails;
 
   public int getId() {
     return id;
@@ -68,15 +70,14 @@ public class ContactData {
     return this;
   }
 
-  public String getGroup() {
-    return group;
+  public String getCompanyAddress() {
+    return companyAddress;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
+  public ContactData withCompanyAddress(String companyAddress) {
+    this.companyAddress = companyAddress;
     return this;
   }
-
 
   public String getAllPhones() {
     return allPhones;
@@ -114,6 +115,15 @@ public class ContactData {
     return this;
   }
 
+  public String getGroup() {
+    return group;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
+  }
+
   public String getAllEmails() {
     return allEmails;
   }
@@ -123,6 +133,14 @@ public class ContactData {
     return this;
   }
 
+  public String getContactDetails() {
+    return contactDetails;
+  }
+
+  public ContactData withContactDetails(String details) {
+    this.contactDetails = details;
+    return this;
+  }
   @Override
   public String toString() {
     return "ContactData{" +
@@ -134,10 +152,12 @@ public class ContactData {
           ", group='" + group + '\'' +
           '}';
   }
-  //          '}';
   //          ", lastName='" + lastName + '\'' +
   //          "firstName='" + firstName + '\'' +
   //    return "ContactData{" +
+
+  //          '}';
+
   //  public String toString() {
 
   //
