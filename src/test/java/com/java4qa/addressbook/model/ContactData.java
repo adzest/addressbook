@@ -1,5 +1,7 @@
 package com.java4qa.addressbook.model;
 
+import java.io.File;
+
 public class ContactData {
   private int id = Integer.MAX_VALUE;
   private String firstName;
@@ -15,6 +17,7 @@ public class ContactData {
   private String allPhones;
   private String allEmails;
   private String contactDetails;
+  private File photo;
 
   public int getId() {
     return id;
@@ -141,30 +144,15 @@ public class ContactData {
     this.contactDetails = details;
     return this;
   }
-  @Override
-  public String toString() {
-    return "ContactData{" +
-          "firstName='" + firstName + '\'' +
-          ", lastName='" + lastName + '\'' +
-          ", homePhone='" + homePhone + '\'' +
-          ", mobilePhone='" + mobilePhone + '\'' +
-          ", workPhone='" + workPhone + '\'' +
-          ", group='" + group + '\'' +
-          '}';
+
+  public File getPhoto() {
+    return photo;
   }
-  //          ", lastName='" + lastName + '\'' +
-  //          "firstName='" + firstName + '\'' +
-  //    return "ContactData{" +
 
-  //          '}';
-
-  //  public String toString() {
-
-  //
-
-  //  @Override
-
-//  }
+  public ContactData withPhoto(File photo) {
+    this.photo = photo;
+    return this;
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -184,5 +172,26 @@ public class ContactData {
     result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
     result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
     return result;
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+          "id=" + id +
+          ", firstName='" + firstName + '\'' +
+          ", lastName='" + lastName + '\'' +
+          ", companyAddress='" + companyAddress + '\'' +
+          ", homePhone='" + homePhone + '\'' +
+          ", mobilePhone='" + mobilePhone + '\'' +
+          ", workPhone='" + workPhone + '\'' +
+          ", email='" + email + '\'' +
+          ", email2='" + email2 + '\'' +
+          ", email3='" + email3 + '\'' +
+          ", group='" + group + '\'' +
+          ", allPhones='" + allPhones + '\'' +
+          ", allEmails='" + allEmails + '\'' +
+          ", contactDetails='" + contactDetails + '\'' +
+          ", photo=" + photo +
+          '}';
   }
 }
