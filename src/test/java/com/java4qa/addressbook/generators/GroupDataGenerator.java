@@ -1,5 +1,8 @@
 package com.java4qa.addressbook.generators;
 
+import com.beust.jcommander.JCommander;
+import com.beust.jcommander.Parameter;
+import com.beust.jcommander.ParameterException;
 import com.java4qa.addressbook.model.GroupData;
 
 import java.io.File;
@@ -11,15 +14,32 @@ import java.util.List;
 
 public class GroupDataGenerator {
 
-  public static void main(String[] args) throws IOException {
-    int count = Integer.parseInt(args[0]);
-    File file = new File(args[1]);
+  @Parameter(names = "-c", description = "Groups count value.")
+  public int count;
 
-    List<GroupData> groups = generatorGroups(count);
-    save(groups, file);
+  @Parameter(names = "-f", description = "File path - absolute.")
+  public String file;
+
+  public static void main(String[] args) throws IOException {
+    GroupDataGenerator generator = new GroupDataGenerator();
+    JCommander jCommander = new JCommander(generator);
+    try{
+      jCommander.parse(args);
+    }
+    catch (ParameterException ex){
+      jCommander.usage();
+      return;
+    }
+    generator.run();
+
   }
 
-  private static void save(List<GroupData> groups, File file) throws IOException {
+  private void run() throws IOException {
+    List<GroupData> groups = generatorGroups(count);
+    save(groups, new File(file));
+  }
+
+  private void save(List<GroupData> groups, File file) throws IOException {
     System.out.println(new File(".").getAbsolutePath());
     Writer writer = new FileWriter(file);
     for (GroupData group : groups) {
@@ -28,7 +48,7 @@ public class GroupDataGenerator {
     writer.close();
   }
 
-  private static List<GroupData> generatorGroups(int count) {
+  private List<GroupData> generatorGroups(int count) {
     List<GroupData> groups = new ArrayList<GroupData>();
     for (int i = 1; i < count + 1; i++) {
       groups.add(new GroupData().withName(String.format("test%S", i))
