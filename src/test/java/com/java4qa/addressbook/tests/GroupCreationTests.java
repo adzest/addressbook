@@ -5,6 +5,7 @@ import com.java4qa.addressbook.model.Groups;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -16,18 +17,28 @@ public class GroupCreationTests extends TestBase {
 
 
   @DataProvider
-  public Iterator<Object[]> validGroups(){
+  public Iterator<Object[]> validGroups() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    list.add(new Object[] {new GroupData().withName("test0").withHeader("header").withFooter("footer")});
-    list.add(new Object[]{new GroupData().withName("test1").withHeader("header").withFooter("footer")});
-    list.add(new Object[]{new GroupData().withName("test2").withHeader("header").withFooter("footer")});
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/validGroups.csv")));
+    String line = reader.readLine();
+    while (line != null){
+      String[] split = line.split(";");
+      list.add(new Object[] {new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
+      line = reader.readLine();
+    }
     return list.iterator();
   }
 
   @DataProvider
-  public Iterator<Object[]> inValidGroups(){
+  public Iterator<Object[]> inValidGroups() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
-    list.add(new Object[] {new GroupData().withName("test'").withHeader("header").withFooter("footer")});
+    BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/invalidGroups.csv")));
+    String line = reader.readLine();
+    while (line != null){
+      String[] split = line.split(";");
+      list.add(new Object[] {new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
+      line = reader.readLine();
+    }
     return list.iterator();
   }
 
