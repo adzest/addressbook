@@ -71,7 +71,7 @@ public class GroupDataGenerator {
   private List<GroupData> generatorGroups(int count) {
     List<GroupData> groups = new ArrayList<GroupData>();
     for (int i = 1; i < count + 1; i++) {
-      groups.add(new GroupData().withName(String.format("test'%S", i))
+      groups.add(new GroupData().withName(String.format("test%S", i))
             .withHeader(String.format("header_%S", i))
             .withFooter(String.format("footer_%S", i)));
     }
