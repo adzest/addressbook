@@ -11,7 +11,8 @@ import java.util.stream.Stream;
 
 public class TestBase {
 
-  protected static final ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+  protected static final ApplicationManager app
+        = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
   public static String cleaned(String contactFiled) {
     return contactFiled.replaceAll("\\s", "").replaceAll("[-()]", "");
