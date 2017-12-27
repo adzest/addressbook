@@ -76,8 +76,7 @@ public class ContactDataGenerator {
             .withWorkPhone(String.format("testWork_%S", i))
             .withEmail(String.format("test_%S@address.com", i))
             .withEmail2(String.format("test_%S@address.com", i))
-            .withEmail3(String.format("test_%S@address.com", i))
-            .withPhoto(new File("test")));
+            .withEmail3(String.format("test_%S@address.com", i)));
     }
     return contacts;
   }

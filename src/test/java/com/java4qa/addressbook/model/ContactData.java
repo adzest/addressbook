@@ -1,10 +1,12 @@
 package com.java4qa.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import java.io.File;
 
+@XStreamAlias("contacts")
 public class ContactData {
   @XStreamOmitField
   private int id = Integer.MAX_VALUE;
