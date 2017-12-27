@@ -1,13 +1,17 @@
 [
   {
-    "firstName": "testFirst_1",
-    "lastName": "tesLast_1",
-    "homePhone": "testHome_1",
-    "mobilePhone": "testMob_1",
-    "workPhone": "testWork_1",
-    "email": "test_1@address.com",
-    "email2": "test_1@address.com",
-    "email3": "test_1@address.com",
-    "photo": {}
+    "name": "test1",
+    "header": "header_1",
+    "footer": "footer_1"
+  },
+  {
+    "name": "test2",
+    "header": "header_2",
+    "footer": "footer_2"
+  },
+  {
+    "name": "test3",
+    "header": "header_3",
+    "footer": "footer_3"
   }
 ]
