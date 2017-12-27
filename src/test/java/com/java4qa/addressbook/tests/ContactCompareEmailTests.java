@@ -4,30 +4,32 @@ import com.java4qa.addressbook.model.ContactData;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactPhoneTests extends TestBase {
+public class ContactCompareEmailTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
     if (app.contact().all().size() == 0) {
       app.goTo().contactCreationPage();
-      //TODO: Add Phone number to the contact
+      //TODO: Add Emails to the contact
       app.contact().create(new ContactData()
-            .withFirst("test_name").withLast("test_surname")
-            .withHomePhone("111").withMobilePhone("222").withWorkPhone("333"), true);
+            .withFirst("name").withLast("surname").withEmail2("email@2").withEmail3("email@3"), true);
     }
   }
 
   @Test
-  public void testContactPhones() {
-    //TODO: DONE - add check is there are any contact?
+  public void testContactEmail() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
-    assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+    assertThat(contact.getAllEmails(), equalTo(mergeEmails(contactInfoFromEditForm)));
+    System.out.println(contact.getAllEmails());
+    System.out.println(mergeEmails(contactInfoFromEditForm));
   }
-
 }

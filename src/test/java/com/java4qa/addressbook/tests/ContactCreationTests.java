@@ -21,7 +21,7 @@ public class ContactCreationTests extends TestBase {
 
   @Test(enabled = true)
   public void testContactCreation() {
-    File photo = new File("src/test/resources/dog.jpeg");
+    File photo = new File("src/test/resources/test.jpeg");
     ContactData contact = new ContactData()
           .withFirst("test_name").withLast("test_surname").withPhoto(photo);
     Contacts before = app.contact().all();

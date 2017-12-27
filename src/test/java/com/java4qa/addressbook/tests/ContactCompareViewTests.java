@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactCompareTests extends TestBase{
+public class ContactCompareViewTests extends TestBase{
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -43,11 +43,11 @@ public class ContactCompareTests extends TestBase{
 //  public ContactData merge(ContactData contact) {
 //    String mergedPhones = Stream.of(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
 //          .filter((s) -> !s.equals(""))
-//          .map(ContactCompareTests::cleaned)
+//          .map(ContactCompareViewTests::cleaned)
 //          .collect(Collectors.joining("\n"));
 //    String mergedEmails = Stream.of(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
 //          .filter((s) -> !s.equals(""))
-//          .map(ContactCompareTests::cleaned)
+//          .map(ContactCompareViewTests::cleaned)
 //          .collect(Collectors.joining("\n"));;
 //    return new ContactData().withId(contact.getId())
 //          .withFirst(contact.getFirstName()).withLast(contact.getLastName()).withCompanyAddress(contact.getCompanyAddress())
