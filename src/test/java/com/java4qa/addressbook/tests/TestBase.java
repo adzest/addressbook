@@ -1,26 +1,17 @@
 package com.java4qa.addressbook.tests;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.java4qa.addressbook.appmanager.ApplicationManager;
 import com.java4qa.addressbook.model.ContactData;
-import com.java4qa.addressbook.model.GroupData;
-import com.thoughtworks.xstream.XStream;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -46,12 +37,12 @@ public class TestBase {
   }
 
   @BeforeMethod
-  public void logTestStart(Method m, Object[] p){
+  public void logTestStart(Method m, Object[] p) {
     logger.info("Start test " + m.getName() + " with parameters " + Arrays.asList(p));
   }
 
   @AfterMethod(alwaysRun = true)
-  public void logTestStop(Method m){
+  public void logTestStop(Method m) {
     logger.info("Start test " + m.getName());
   }
 

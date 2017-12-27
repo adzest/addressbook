@@ -51,7 +51,6 @@ public class GroupDataGenerator {
     {
       System.out.println("Unrecognized format " + format);
     }
-
   }
 
   private void saveAsJson(List<GroupData> groups, File file) throws IOException {

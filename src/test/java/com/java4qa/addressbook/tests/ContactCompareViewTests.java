@@ -4,13 +4,10 @@ import com.java4qa.addressbook.model.ContactData;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class ContactCompareViewTests extends TestBase{
+public class ContactCompareViewTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -18,15 +15,15 @@ public class ContactCompareViewTests extends TestBase{
       app.goTo().contactCreationPage();
       //TODO: Add Data without Group field to the Contact
       app.contact().create(new ContactData()
-            .withFirst("name").withLast("surname").withCompanyAddress("companyAddress")
-            .withHomePhone("+111").withMobilePhone("(22)2").withWorkPhone("3-3 3")
-            .withEmail2("email@2").withEmail3("email@3"),
+                  .withFirst("name").withLast("surname").withCompanyAddress("companyAddress")
+                  .withHomePhone("+111").withMobilePhone("(22)2").withWorkPhone("3-3 3")
+                  .withEmail2("email@2").withEmail3("email@3"),
             true);
     }
   }
 
   @Test
-  public void testContactCompare () {
+  public void testContactCompare() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);

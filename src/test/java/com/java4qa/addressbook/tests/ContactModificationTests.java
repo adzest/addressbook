@@ -11,11 +11,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
-  public void ensurePreconditions(){
+  public void ensurePreconditions() {
     if (app.contact().all().size() == 0) {
       app.goTo().contactCreationPage();
       app.contact().create(new ContactData()
-            .withFirst("name_test").withLast("test_surname").withGroup("test1"),  true);
+            .withFirst("name_test").withLast("test_surname").withGroup("test1"), true);
     }
   }
 
