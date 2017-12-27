@@ -63,7 +63,6 @@ public class GroupCreationTests extends TestBase {
     return groups.stream().map((g) ->  new Object[] {g}).collect(Collectors.toList()).iterator();
   }
 
-
   @Test(dataProvider = "validGroupsFromJson")
   public static void testGroupCreation(GroupData group) {
     app.goTo().groupPage();
