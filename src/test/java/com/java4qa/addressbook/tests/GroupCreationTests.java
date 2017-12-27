@@ -73,7 +73,7 @@ public class GroupCreationTests extends TestBase {
           before.withAdded(group.withId(after.stream().mapToInt(GroupData::getId).max().getAsInt()))));
   }
 
-  @Test(dataProvider = "inValidGroups")
+  @Test(enabled = false, dataProvider = "inValidGroups")
   public void testBadGroupCreation(GroupData group) {
     app.goTo().groupPage();
     Groups before = app.group().all();
