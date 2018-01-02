@@ -192,8 +192,8 @@ public class ContactData {
     return this;
   }
 
-  public File getPhoto() {
-    return new File(photo);
+  public String getPhoto() {
+    return photo;
   }
 
   public ContactData withPhoto(File photo) {

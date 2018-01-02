@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.java4qa.addressbook.model.GroupData;
 import com.java4qa.addressbook.model.Groups;
 import com.thoughtworks.xstream.XStream;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -74,10 +75,13 @@ public class GroupCreationTests extends TestBase {
     Groups after = app.group().all();
     //noinspection ConstantConditions
     assertThat(after, equalTo(
-          before.withAdded(group.withId(after.stream().mapToInt(GroupData::getId).max().getAsInt()))));
+          before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt())
+                .withFooter(null)
+                .withHeader(null))));
+    verifyGroupListInUI();
   }
 
-  @Test(enabled = false, dataProvider = "inValidGroupsXml")
+  @Test(enabled = true, dataProvider = "inValidGroupsXml")
   public void testBadGroupCreation(GroupData group) {
     app.goTo().groupPage();
     Groups before = app.group().all();
@@ -85,6 +89,7 @@ public class GroupCreationTests extends TestBase {
     assertThat(app.group().count(), equalTo(before.size()));
     Groups after = app.group().all();
     assertThat(after, equalTo(before));
+    verifyGroupListInUI();
   }
 
 }

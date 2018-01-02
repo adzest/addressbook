@@ -880,3 +880,5 @@
 12303 [main] DEBUG o.h.internal.util.EntityPrinter - com.java4qa.addressbook.model.GroupData{footer=test3, name=test1_mod, header=test2, id=295}
 12304 [main] DEBUG o.h.r.j.i.LogicalConnectionManagedImpl - Initiating JDBC connection release from afterTransaction
 12305 [main] DEBUG o.h.r.j.i.LogicalConnectionManagedImpl - Initiating JDBC connection release from afterTransaction
+2577310 [pool-1-thread-1] DEBUG o.h.e.j.c.i.DriverManagerConnectionProviderImpl - Connection pool now considered primed; min-size will be maintained
+2577314 [main] INFO  c.j.addressbook.tests.TestBase - Start test testGroupModification

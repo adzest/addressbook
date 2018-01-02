@@ -70,9 +70,10 @@ public class ContactCreationTests extends TestBase {
     //noinspection ConstantConditions
     assertThat(after, equalTo(
           before.withAdded(contact.withId(after.stream().mapToInt(ContactData::getId).max().getAsInt()))));
+    verifyContactListInUI();
   }
 
-  @Test(enabled = false)
+  @Test(enabled = true)
   public void testContactCreationWithGroup() {
 //    TODO: add ensurePreconditions() for this test. Groups should be existed!
     Contacts before = app.contact().all();
@@ -85,9 +86,10 @@ public class ContactCreationTests extends TestBase {
     //noinspection ConstantConditions
     assertThat(after, equalTo(
           before.withAdded(contact.withId(after.stream().mapToInt(ContactData::getId).max().getAsInt()))));
+    verifyContactListInUI();
   }
 
-  @Test(enabled = false)
+  @Test(enabled = true)
   public void testContactCreationWithPones() {
     Contacts before = app.contact().all();
     app.goTo().contactCreationPage();
@@ -99,9 +101,10 @@ public class ContactCreationTests extends TestBase {
     //noinspection ConstantConditions
     assertThat(after, equalTo(
           before.withAdded(contact.withId(after.stream().mapToInt(ContactData::getId).max().getAsInt()))));
+    verifyContactListInUI();
   }
 
-  @Test(enabled = false)
+  @Test(enabled = true)
   public void testContactCreationWithOutGroup() {
     Contacts before = app.contact().all();
     app.goTo().contactCreationPage();
@@ -115,5 +118,6 @@ public class ContactCreationTests extends TestBase {
     //noinspection ConstantConditions
     assertThat(after, equalTo(
           before.withAdded(contact.withId(after.stream().mapToInt(ContactData::getId).max().getAsInt()))));
+    verifyContactListInUI();
   }
 }

@@ -2,6 +2,7 @@ package com.java4qa.addressbook.tests;
 
 import com.java4qa.addressbook.model.GroupData;
 import com.java4qa.addressbook.model.Groups;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -11,12 +12,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class GroupModificationTests extends TestBase {
 
   @BeforeMethod
-  public void insurePreconditions() {
+  public void ensurePreconditions() {
     if (app.db().groups().size() == 0) {
       app.group().create(new GroupData().withName("test1"));
     }
   }
-
+  
   @Test()
   public void testGroupModification() {
     Groups before = app.db().groups();

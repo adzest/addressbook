@@ -2,6 +2,7 @@ package com.java4qa.addressbook.tests;
 
 import com.java4qa.addressbook.appmanager.ApplicationManager;
 import com.java4qa.addressbook.model.ContactData;
+import com.java4qa.addressbook.model.Contacts;
 import com.java4qa.addressbook.model.GroupData;
 import com.java4qa.addressbook.model.Groups;
 import org.openqa.selenium.remote.BrowserType;
@@ -65,15 +66,33 @@ public class TestBase {
           .collect(Collectors.joining("\n"));
   }
 
-  public void verifyGroupListInUI() {
+  public static void verifyGroupListInUI() {
     if (Boolean.getBoolean("verifyUI")) {
       Groups dbGroups = app.db().groups();
       Groups uiGroups = app.group().all();
-      System.out.println(uiGroups);
-      System.out.println(dbGroups);
-      assertThat(uiGroups, equalTo(dbGroups.stream()
-            .map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
-            .collect(Collectors.toSet())));
+      assertThat(uiGroups, equalTo(dbGroups
+                  .stream()
+                  .map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
+                  .collect(Collectors.toSet())
+            )
+      );
+    }
+  }
+
+  public void verifyContactListInUI() {
+    if (Boolean.getBoolean("verifyUI")) {
+      Contacts dbContacts = app.db().contacts();
+      Contacts uiContacts = app.contact().all();
+      assertThat(uiContacts, equalTo(dbContacts
+                  .stream()
+                  .map((c) -> new ContactData()
+                        .withId(c.getId())
+                        .withFirst(c.getFirstName())
+                        .withLast(c.getLastName())
+                  )
+                  .collect(Collectors.toSet())
+            )
+      );
     }
   }
 }

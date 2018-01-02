@@ -15,10 +15,6 @@ public class HelperBase {
     this.wd = wd;
   }
 
-  protected void click(By locator) {
-    wd.findElement(locator).click();
-  }
-
   protected void type(By locator, String text) {
     click(locator);
     if (text != null) {
@@ -28,6 +24,10 @@ public class HelperBase {
         wd.findElement(locator).sendKeys(text);
       }
     }
+  }
+
+  protected void click(By locator) {
+    wd.findElement(locator).click();
   }
 
   protected void attach(By locator, File file) {
