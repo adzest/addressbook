@@ -29,5 +29,7 @@ public class GroupModificationTests extends TestBase {
     Groups after = app.db().groups();
     //TODO:DONE - Chapter 5 video 6: replace 2 methods with one withModified.
     assertThat(after, equalTo(before.withModified(modifiedGroup, group)));
+    verifyGroupListInUI();
   }
+
 }

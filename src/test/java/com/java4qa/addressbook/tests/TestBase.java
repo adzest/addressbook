@@ -2,6 +2,8 @@ package com.java4qa.addressbook.tests;
 
 import com.java4qa.addressbook.appmanager.ApplicationManager;
 import com.java4qa.addressbook.model.ContactData;
+import com.java4qa.addressbook.model.GroupData;
+import com.java4qa.addressbook.model.Groups;
 import org.openqa.selenium.remote.BrowserType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +16,9 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class TestBase {
 
@@ -58,5 +63,17 @@ public class TestBase {
           .filter((s) -> !s.equals(""))
           .map(TestBase::cleaned)
           .collect(Collectors.joining("\n"));
+  }
+
+  public void verifyGroupListInUI() {
+    if (Boolean.getBoolean("verifyUI")) {
+      Groups dbGroups = app.db().groups();
+      Groups uiGroups = app.group().all();
+      System.out.println(uiGroups);
+      System.out.println(dbGroups);
+      assertThat(uiGroups, equalTo(dbGroups.stream()
+            .map((g) -> new GroupData().withId(g.getId()).withName(g.getName()))
+            .collect(Collectors.toSet())));
+    }
   }
 }
