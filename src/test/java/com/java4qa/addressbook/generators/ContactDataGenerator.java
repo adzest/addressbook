@@ -15,6 +15,8 @@ import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.String.*;
+
 public class ContactDataGenerator {
 
   @Parameter(names = "-c", description = "Contact count value.")
@@ -69,14 +71,16 @@ public class ContactDataGenerator {
   private List<ContactData> generatorContacts(int count) {
     List<ContactData> contacts = new ArrayList<ContactData>();
     for (int i = 1; i < count + 1; i++) {
-      contacts.add(new ContactData().withFirst(String.format("testFirst_%S", i))
-            .withLast(String.format("tesLast_%S", i))
-            .withHomePhone(String.format("testHome_%S", i))
-            .withMobilePhone(String.format("testMob_%S", i))
-            .withWorkPhone(String.format("testWork_%S", i))
-            .withEmail(String.format("test_%S@address.com", i))
-            .withEmail2(String.format("test_%S@address.com", i))
-            .withEmail3(String.format("test_%S@address.com", i)));
+      contacts.add(new ContactData().withFirst(format("testFirst_%S", i))
+            .withLast(format("tesLast_%S", i))
+            .withHomePhone(format("testHome_%S", i))
+            .withMobilePhone(format("testMob_%S", i))
+            .withWorkPhone(format("testWork_%S", i))
+            .withEmail(format("test_%S@address.com", i))
+            .withEmail2(format("test_%S@address.com", i))
+            .withEmail3(format("test_%S@address.com", i))
+            .withPhoto(new File(format("src/test/resources/test_%S.jpg", i)))
+      );
     }
     return contacts;
   }

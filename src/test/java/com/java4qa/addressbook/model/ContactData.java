@@ -7,6 +7,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @XStreamAlias("contacts")
 @Entity
@@ -49,9 +51,6 @@ public class ContactData {
   @Column(name = "email3")
   @Type(type = "text")
   private String email3;
-  @Expose
-  @Transient
-  private String group;
   @XStreamOmitField
   @Transient
   private String allPhones;
@@ -65,6 +64,12 @@ public class ContactData {
   @Column(name = "photo")
   @Type(type = "text")
   private String photo;
+
+  @ManyToMany
+  @JoinTable(name = "address_in_groups",
+        joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
   public String getHomePhone() {
     return homePhone;
@@ -165,15 +170,6 @@ public class ContactData {
     return this;
   }
 
-  public String getGroup() {
-    return group;
-  }
-
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
-  }
-
   public String getAllEmails() {
     return allEmails;
   }
@@ -196,8 +192,27 @@ public class ContactData {
     return photo;
   }
 
+  @Override
+  public String toString() {
+    return "ContactData{" +
+          "id=" + id +
+          ", firstName='" + firstName + '\'' +
+          ", lastName='" + lastName + '\'' +
+          ", groups=" + groups +
+          '}';
+  }
+
   public ContactData withPhoto(File photo) {
     this.photo = photo.getPath();
+    return this;
+  }
+
+  public Groups getGroups() {
+    return new Groups(groups);
+  }
+
+  public ContactData inGroups(GroupData group) {
+    groups.add(group);
     return this;
   }
 
@@ -221,24 +236,4 @@ public class ContactData {
     return result;
   }
 
-  @Override
-  public String toString() {
-    return "ContactData{" +
-          "id=" + id +
-          ", firstName='" + firstName + '\'' +
-          ", lastName='" + lastName + '\'' +
-          ", companyAddress='" + companyAddress + '\'' +
-          ", homePhone='" + homePhone + '\'' +
-          ", mobilePhone='" + mobilePhone + '\'' +
-          ", workPhone='" + workPhone + '\'' +
-          ", email='" + email + '\'' +
-          ", email2='" + email2 + '\'' +
-          ", email3='" + email3 + '\'' +
-          ", group='" + group + '\'' +
-          ", allPhones='" + allPhones + '\'' +
-          ", allEmails='" + allEmails + '\'' +
-          ", contactDetails='" + contactDetails + '\'' +
-          ", photo=" + photo +
-          '}';
-  }
 }
