@@ -19,7 +19,7 @@ public class GroupData {
   private int id = Integer.MAX_VALUE;
   @Expose
   @Column(name = "group_name")
-  private String name;
+  private String name = null;
   @Expose
   @Column(name = "group_header")
   @Type(type = "text")
@@ -58,7 +58,9 @@ public class GroupData {
   }
 
   public GroupData withName(String name) {
-    this.name = name;
+    if (name != null) {
+      this.name = name;
+    }
     return this;
   }
 

@@ -15,7 +15,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.security.acl.Group;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,7 +62,6 @@ public class ContactCreationTests extends TestBase {
     List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>() {}.getType());
     return contacts.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
   }
-
 
   @Test(enabled = true, dataProvider = "validContactsFromJson", groups = "withGroup")
   public void testContactCreationFull(ContactData newContact) {
@@ -116,7 +114,7 @@ public class ContactCreationTests extends TestBase {
 //    Contacts before = app.contact().all();
 //    app.goTo().contactCreationPage();
 //    ContactData contact = new ContactData()
-//          .withFirst("name").withLast("surname").withCompanyAddress("companyAddress")
+//          .withFirst("name").withLast("surname").withAddress("companyAddress")
 //          .withHomePhone("+111").withMobilePhone("(22)2").withWorkPhone("3-3 3")
 //          .withEmail2("email@2").withEmail3("email@3");
 //    app.contact().create(contact, true);

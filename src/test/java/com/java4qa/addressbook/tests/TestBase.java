@@ -53,7 +53,7 @@ public class TestBase {
   }
 
   public String mergePhones(ContactData contact) {
-    return Stream.of(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
+    return Stream.of(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getHomePhoneNum())
           .filter((s) -> !s.equals(""))
           .map(TestBase::cleaned)
           .collect(Collectors.joining("\n"));

@@ -20,16 +20,5 @@
     "email2": "test_2@address.com",
     "email3": "test_2@address.com",
     "photo": "src/test/resources/test_2.jpg"
-  },
-  {
-    "firstName": "testFirst_3",
-    "lastName": "tesLast_3",
-    "homePhone": "testHome_3",
-    "mobilePhone": "testMob_3",
-    "workPhone": "testWork_3",
-    "email": "test_3@address.com",
-    "email2": "test_3@address.com",
-    "email3": "test_3@address.com",
-    "photo": "src/test/resources/test_3.jpg"
   }
 ]

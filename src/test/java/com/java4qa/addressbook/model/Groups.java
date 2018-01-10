@@ -1,10 +1,17 @@
 package com.java4qa.addressbook.model;
 
 import com.google.common.collect.ForwardingSet;
+import org.hibernate.annotations.LazyCollection;
 
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import javax.transaction.Transactional;
 import java.util.*;
 
+
 @SuppressWarnings("Convert2Diamond")
+@Transactional
 public class Groups extends ForwardingSet<GroupData>{
 
   private Set<GroupData> delegate;
