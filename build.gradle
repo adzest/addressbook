@@ -3,15 +3,12 @@ apply plugin: 'idea'
 
 sourceCompatibility = 1.8
 
-plugins {
-  id "org.sonarqube" version "2.6"
-}
-
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    compile 'org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.6.2'
     compile 'org.seleniumhq.selenium:selenium-java:3.8.1'
     compile 'org.testng:testng:6.13.1'
     compile 'org.hamcrest:java-hamcrest:2.0.0.0'
@@ -27,14 +24,14 @@ task testGroups(type: Test) {
     useTestNG() {
         suites "src/test/resources/testng-groups.xml"
     }
-    if (project.hasProperty('browser')){
-        systemProperty 'browser',  "${browser}"
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
     }
-    if (project.hasProperty('target')){
-        systemProperty 'target',  "${target}"
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
     }
-    if (project.hasProperty('verifyUI')){
-        systemProperty 'verifyUI',  "${verifyUI}"
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
     }
 }
 
@@ -42,14 +39,14 @@ task testContacts(type: Test) {
     useTestNG() {
         suites "src/test/resources/testng-contacts.xml"
     }
-    if (project.hasProperty('browser')){
-        systemProperty 'browser',  "${browser}"
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
     }
-    if (project.hasProperty('target')){
-        systemProperty 'target',  "${target}"
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
     }
-    if (project.hasProperty('verifyUI')){
-        systemProperty 'verifyUI',  "${verifyUI}"
+    if (project.hasProperty('verifyUI')) {
+        systemProperty 'verifyUI', "${verifyUI}"
     }
 }
 
@@ -57,10 +54,10 @@ task testContactsCompare(type: Test) {
     useTestNG() {
         suites "src/test/resources/testng-contacts-compare.xml"
     }
-    if (project.hasProperty('browser')){
-        systemProperty 'browser',  "${browser}"
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
     }
-    if (project.hasProperty('target')){
-        systemProperty 'target',  "${target}"
+    if (project.hasProperty('target')) {
+        systemProperty 'target', "${target}"
     }
 }
