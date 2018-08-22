@@ -3,6 +3,10 @@ apply plugin: 'idea'
 
 sourceCompatibility = 1.8
 
+plugins {
+  id "org.sonarqube" version "2.6"
+}
+
 repositories {
     mavenCentral()
 }
